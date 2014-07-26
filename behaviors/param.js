@@ -85,10 +85,11 @@ module.exports = function(container){
   }
 
   function setValue(value){
+    display(value)
     updateNode(context, path, {
       $node: 'match',
       value: value
-    })
+    }, container.classList.contains('-forceRefresh'))
   }
 
   slider.addEventListener('mousedown', handleDown)
@@ -101,6 +102,7 @@ module.exports = function(container){
       formatter = formatters[container.dataset.f] || formatters['default']
 
       var value = context.get(path)
+      var defaultValue = container.dataset['default']
       var object = null
 
       if (value && !Array.isArray(value) && value instanceof Object){
@@ -108,8 +110,8 @@ module.exports = function(container){
         value = value.value
       }
 
-      if (value == null && container.dataset['default']){
-        value = parseFloat(container.dataset['default'])
+      if (value == null && defaultValue){
+        value = parseFloat(defaultValue)
       }
 
       var modifier = object && object.node
@@ -127,9 +129,13 @@ module.exports = function(container){
         lastModifier = modifier
       }
 
-      label.innerText = formatter.display(value)
-      width.style.width = getWidth(formatter.size(value))
+      display(value)
     }
+  }
+
+  function display(value){
+    label.innerText = formatter.display(value)
+    width.style.width = getWidth(formatter.size(value))
   }
 
   function scheduleRefresh(){
