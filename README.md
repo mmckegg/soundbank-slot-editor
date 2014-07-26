@@ -11,6 +11,10 @@ Used as the sound editor in [Loop Drop](https://github.com/mmckegg/loop-drop-app
 $ npm install soundbank-slot-editor
 ```
 
+## TODO
+
+Currently only allows the predefined set of sources, processors, modulators from Loop Drop.  Needs to be user definable, or get available nodes automatically from AudioContext.
+
 ## API
 
 ```js
