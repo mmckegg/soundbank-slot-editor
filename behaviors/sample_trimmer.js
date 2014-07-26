@@ -16,12 +16,6 @@ module.exports = function(element){
   var startSlider = element.querySelector(query('input.start'))
   var endSlider = element.querySelector(query('input.end'))
 
-  var waveScale = svg.createSVGTransform()
-  wavePath.transform.baseVal.appendItem(waveScale)
-
-  var waveTranslate = svg.createSVGTransform()
-  wavePath.transform.baseVal.appendItem(waveTranslate)
-
   var path = element.dataset.path
   var currentWidthScale = 1
   var currentHeightScale = 1
@@ -44,8 +38,7 @@ module.exports = function(element){
 
   function updateScale(){
     var offsetHeight = (((currentHeightScale*height) - height) / 2) / currentHeightScale
-    waveScale.setScale(currentWidthScale, currentHeightScale)
-    waveTranslate.setTranslate(0, -offsetHeight)
+    wavePath.setAttribute('transform', 'scale(' + currentWidthScale + ' ' + currentHeightScale + ') translate(0 ' + -offsetHeight + ')')
   }
 
   function updateOffset(){
