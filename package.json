@@ -8,7 +8,7 @@
   },
   "browserify": {
     "transform": [
-      "rincewind-precompile-transform"
+      "rincewind-precompile-transform", "brfs"
     ]
   },
   "repository": {
@@ -21,7 +21,10 @@
     "slot",
     "waapi",
     "descriptor",
-    "AudioNode"
+    "AudioNode",
+    "loop",
+    "drop",
+    "browser"
   ],
   "author": "Matt McKegg",
   "license": "ISC",
@@ -38,6 +41,7 @@
     "micro-css": "^0.4.1",
     "frac": "^1.0.0",
     "teoria": "^1.0.1",
-    "create-element": "^0.2.3"
+    "create-element": "^0.2.3",
+    "brfs": "^1.2.0"
   }
 }

@@ -2,7 +2,6 @@
 <? require './views/param.html' as param ?>
 <? require './views/sample_trimmer.html' as sampleTrimmer ?>
 <? require './views/slot_options.js' as slotOptions ?>
-<? require './views/mcss.js' as mcss ?>
 
 <? require './formatters/path.js' as path ?>
 <? require './formatters/scale.js' as scale ?>
@@ -10,13 +9,7 @@
 <? require './formatters/is.js' as is ?>
 <? require './formatters/is-linked.js' as isLinked ?>
 
-
-<? resource './styles/node.mcss' as Node ?>
-<? resource './styles/param.mcss' as Param ?>
-<? resource './styles/sample_trimmer.mcss' as SampleTrimmer ?>
-<? resource './styles/piano.mcss' as Piano ?>
-<? resource './styles/spawner.mcss' as Spawner ?>
-<? resource './styles/toggle_button.mcss' as ToggleButton ?>
+<? require './styles/index.js' as styles ?>
 
 <style scoped>
   body {
@@ -25,7 +18,7 @@
     font-size: 12px;
   }
 </style>
-<style scoped t:view='mcss' />
+<style scoped t:view='styles' />
 
 <div class='Node' test='true'>
   <div class='.title'>Channel</div>
