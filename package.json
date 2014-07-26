@@ -1,6 +1,6 @@
 {
   "name": "soundbank-slot-editor",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Visual node editor for soundbank slots.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
   },
   "browserify": {
     "transform": [
-      "rincewind-precompile-transform", "brfs"
+      "rincewind-precompile-transform",
+      "brfs"
     ]
   },
   "repository": {
