@@ -8,12 +8,13 @@ var jsonQuery = require('json-query')
 var render = View(__dirname + '/editor.html')
 ///
 
-module.exports = function(element){
+module.exports = function(audioContext, element){
   var self = new EventEmitter()
   var updateBehaviors = behave(element)
 
   var context = {
     get: getValue,
+    audioContext: audioContext,
     changed: function(action, path, shouldRefresh){
       self.emit('change', obtain(this.data.slot), {action: action, path: path})
       if (shouldRefresh !== false){

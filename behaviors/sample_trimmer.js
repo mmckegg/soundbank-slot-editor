@@ -8,6 +8,7 @@ var height = 400
 
 module.exports = function(element){
   var context = getContext(element)
+  var audioContext = context.audioContext
 
   var svg = element.querySelector('svg')
   var wavePath = element.querySelector(query('svg path.wave'))
@@ -71,9 +72,9 @@ module.exports = function(element){
       }
 
       // update sample
-      if (lastUrl != value.url && typeof context.loadSample == 'function'){
+      if (lastUrl != value.url && typeof audioContext.loadSample == 'function'){
 
-        context.loadSample(value.url, function(buffer){
+        audioContext.loadSample(value.url, function(buffer){
           var data = buffer ? buffer.getChannelData(0) : []
           var step = data.length / width
           var quant = Math.ceil(step)
