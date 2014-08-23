@@ -52,10 +52,7 @@ module.exports = function(container){
 
   function handleDown(e){
     range = slider.getBoundingClientRect().width
-    startValue = context.get(container.dataset.path)
-    if (startValue && !Array.isArray(startValue) && startValue instanceof Object){
-      startValue = startValue.value
-    }
+    startValue = getValue(context.get(container.dataset.path))
 
     if (startValue == null && container.dataset['default']){
       startValue = parseFloat(container.dataset['default'])
@@ -90,6 +87,7 @@ module.exports = function(container){
       $node: 'match',
       value: value
     }, container.classList.contains('-forceRefresh'))
+    console.log(value)
   }
 
   slider.addEventListener('mousedown', handleDown)
@@ -107,7 +105,7 @@ module.exports = function(container){
 
       if (value && !Array.isArray(value) && value instanceof Object){
         object = value
-        value = value.value
+        value = getValue(object)
       }
 
       if (value == null && defaultValue){
@@ -149,4 +147,12 @@ module.exports = function(container){
 
 function getWidth(size){
   return Math.min(1, Math.max(0, size)) * 100 + '%'
+}
+
+function getValue(object){
+  if (object instanceof Object && !Array.isArray(object)){
+    getValue(object.value)
+  } else {
+    return object
+  }
 }

@@ -10,7 +10,7 @@ module.exports = function updateSlot(context, path, value, shouldRefresh){
         if (value.$node == 'match'){
 
           if (obj[res.key] && !Array.isArray(obj[res.key]) && obj[res.key] instanceof Object){
-            obj[res.key].value = value.value
+            setValue(obj[res.key], value.value)
           } else {
             obj[res.key] = value.value
           }
@@ -49,5 +49,13 @@ module.exports = function updateSlot(context, path, value, shouldRefresh){
 
       context.changed('update', path, shouldRefresh)
     }
+  }
+}
+
+function setValue(object, value){
+  if (object.value instanceof Object && !Array.isArray(object.value)){
+    setValue(object.value, value)
+  } else {
+    object.value = value
   }
 }
