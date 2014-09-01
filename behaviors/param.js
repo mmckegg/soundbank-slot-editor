@@ -151,7 +151,7 @@ function getWidth(size){
 
 function getValue(object){
   if (object instanceof Object && !Array.isArray(object)){
-    getValue(object.value)
+    return getValue(object.value)
   } else {
     return object
   }
