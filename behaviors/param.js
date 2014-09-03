@@ -87,7 +87,6 @@ module.exports = function(container){
       $node: 'match',
       value: value
     }, container.classList.contains('-forceRefresh'))
-    console.log(value)
   }
 
   slider.addEventListener('mousedown', handleDown)
