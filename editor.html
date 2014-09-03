@@ -31,6 +31,7 @@
         data-path='slot.node'>
 
         <option value=''>Audio Slot</option>
+        <option value='modulator'>Modulator</option>
         <option value='inherit'>Inherit from</option>
 
       </select>
@@ -56,7 +57,7 @@
       </select>
 
     </div>
-    <div t:unless='slot.node:is(inherit)' >  
+    <div t:if='slot.node:isEmpty' >  
       <select data-behavior='nodes.select' t:bind:data-value='slot.inputMode' data-path='slot.inputMode'>
         <option value='off'>No Input</option>
         <option value=''>Accept Input</option>
@@ -70,11 +71,21 @@
         <option value='meddler'>Meddler</option>
       </select>
     </div>
+
+    <div t:if='slot.node:is(modulator)' class='-flex'>
+      <div class='.title'>offset</div>
+      <div class='Param' t:view='param' 
+        data-behavior='param' 
+        data-f='offset' 
+        data-default='0'
+        t:bind='slot.valueOffset' 
+        data-path='slot.valueOffset' />
+    </div>
   </div>
 
 </div>
 
-<div t:unless='slot.node:is(inherit)'>
+<div t:if='slot.node:isEmpty'>
 
   <div class='Node -source $node' t:repeat='slot.sources' t:by='.node' t:bind:data-path=':path'>
     <div class='.controls'>

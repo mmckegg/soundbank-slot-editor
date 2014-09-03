@@ -29,6 +29,35 @@ module.exports = {
     }
   },
 
+  'offset': {
+    size: function(value){
+      if (value > 0){
+        return 0.5 + getRatio(value, 0, 10000, 'log+') / 2
+      } else if (value < 0){
+        return 0.5 - getRatio(-value, 0, 10000, 'log+') / 2
+      } else {
+        return 0.5
+      }
+    },
+    value: function(offset, start){
+      var ratio = module.exports.offset.size(start) + offset
+      if (ratio > 0.5){
+        return round(Math.max(0, getValueFromScreen((ratio - 0.5) * 2, 0, 0, 10000, 'log+')), 3)
+      } else if (ratio < 0.5){
+        return round(-Math.max(0, getValueFromScreen((0.5 - ratio) * 2, 0, 0, 10000, 'log+')), 3)
+      } else {
+        return 0
+      }
+    },
+    display: function(value){
+      if (value > 0){
+        return '+' + String(round(value, 2))
+      } else {
+        return String(round(value, 2))
+      }
+    }
+  },
+
   'sampleRatio': {
     size: function(value){
       return getRatio(value, 0, 1)
