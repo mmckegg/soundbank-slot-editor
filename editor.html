@@ -71,6 +71,9 @@
     <t:placeholder t:when='sample'>
       <div class='.title' t:bind='.url:or(empty sample)' />
       <div class='.body'>
+        <div t:if='supportsImportSample'>
+          <input type='file' accept='audio/wave' data-behavior='browseSample' t:bind:data-path=':path' />
+        </div>
         <div>
           <select 
             data-behavior='nodes.select' 

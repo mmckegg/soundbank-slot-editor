@@ -24,6 +24,21 @@ module.exports = function(element){
   var lastOffset = null
   var lastAmp = null
 
+  var dragOverHandler = {
+    handleEvent: onDragOver,
+    path: element.dataset.path,
+    context: context
+  }
+
+  var dropHandler = {
+    handleEvent: onDrop,
+    path: element.dataset.path,
+    context: context
+  }
+
+  element.addEventListener('dragover', dragOverHandler, false)
+  element.addEventListener('drop', dropHandler, false)
+
   startSlider.oninput = function(){
     lastOffset = [parseFloat(this.value), lastOffset[1]]
     updateOffset()
@@ -93,12 +108,41 @@ module.exports = function(element){
         lastAmp = amp
       }
 
+    } else {
+      element.removeEventListener('dragover', dragOverHandler, false)
+      element.removeEventListener('drop', dropHandler, false)
     }
   }
 
   refresh()
 
   return refresh
+}
+
+function onDrop(e){
+  var context = this.context
+  var path = this.path
+
+  e.preventDefault()
+  e.stopPropagation()
+
+  console.log(e.dataTransfer.files[0])
+  context.handleFile(e.dataTransfer.files[0], function(err, info){
+    console.log(err, info)
+    if (!err){
+      updateNode(context, path + '.offset', info.offset, false)
+      updateNode(context, path + '.url', info.url)
+    }
+  })
+}
+
+function onDragOver(e){
+  console.log(e, this)
+  if (this.context.handleFile){
+    e.preventDefault()
+    e.stopPropagation()
+    e.dataTransfer.dropEffect = 'link'
+  }
 }
 
 

@@ -4,7 +4,8 @@ var behaviors = {
   nodes: require('./nodes'),
   noteChooser: require('./note_chooser'),
   param: require('./param'),
-  sampleTrimmer: require('./sample_trimmer')
+  sampleTrimmer: require('./sample_trimmer'),
+  browseSample: require('./browse_sample')
 }
 
 module.exports = function(element){

@@ -20,6 +20,7 @@ module.exports = function(audioContext, element){
 
   var context = {
     get: getValue,
+    handleFile: audioContext.importSample,
     audioContext: audioContext,
     globals: globals,
     changed: function(action, path, shouldRefresh){
@@ -29,6 +30,7 @@ module.exports = function(audioContext, element){
       }
     },
     data: {
+      supportsImportSample: typeof audioContext.importSample === 'function',
       slot: null
     },
     source: null
