@@ -497,20 +497,8 @@
       </div>
       <div>  
         <select data-behavior='nodes.select' t:bind:data-value='slot.output' data-path='slot.output'>
-          <option value=''>Master</option>
-          <option value='meddler'>Meddler</option>
-          <optgroup label='Busses'>
-            <option value='A'>Bus A</option>
-            <option value='B'>Bus B</option>
-            <option value='C'>Bus C</option>
-            <option value='D'>Bus D</option>
-            <option value='E'>Bus E</option>
-            <option value='F'>Bus F</option>
-            <option value='G'>Bus G</option>
-            <option value='H'>Bus H</option>
-          </optgroup>
-
-          <optgroup label='Slots' t:view='slotOptions'/>
+          <option value='output'>Output</option>
+          <option t:unless='slot.output:is(output)' t:bind:value='slot.output' t:bind='slot.output' />
         </select>
       </div>
     </div>
