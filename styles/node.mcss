@@ -79,6 +79,7 @@ div.body {
       -webkit-appearance: none;
       color: #FFF;
       text-align: center;
+      padding-right: 10px;
     }
   }
 }
