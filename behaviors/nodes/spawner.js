@@ -9,6 +9,10 @@ module.exports = function spawner(context, node, element, target){
       object.frequency = 440
     }
 
+    if (object.node === 'sample'){
+      object.mode = 'oneshot'
+    }
+
     if (object.node === 'filter'){
       object.frequency = 350
     }
