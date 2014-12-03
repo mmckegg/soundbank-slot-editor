@@ -30,12 +30,19 @@ module.exports = function(element){
     context: context
   }
 
+  var dragLeaveHandler = {
+    handleEvent: onDragLeave,
+    path: element.dataset.path,
+    context: context
+  }
+
   var dropHandler = {
     handleEvent: onDrop,
     path: element.dataset.path,
     context: context
   }
 
+  element.addEventListener('dragleave', dragLeaveHandler, false)
   element.addEventListener('dragover', dragOverHandler, false)
   element.addEventListener('drop', dropHandler, false)
 
@@ -138,8 +145,13 @@ function onDragOver(e){
   if (this.context.handleFile){
     e.preventDefault()
     e.stopPropagation()
-    e.dataTransfer.dropEffect = 'link'
+    e.dataTransfer.dropEffect = 'copy'
+    e.currentTarget.classList.add('-dragover')
   }
+}
+
+function onDragLeave(e){
+  e.currentTarget.classList.remove('-dragover')
 }
 
 
