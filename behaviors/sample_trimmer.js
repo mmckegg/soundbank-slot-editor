@@ -126,9 +126,7 @@ function onDrop(e){
   e.preventDefault()
   e.stopPropagation()
 
-  console.log(e.dataTransfer.files[0])
   context.handleFile(e.dataTransfer.files[0], function(err, info){
-    console.log(err, info)
     if (!err){
       updateNode(context, path + '.offset', info.offset, false)
       updateNode(context, path + '.url', info.url)
@@ -137,7 +135,6 @@ function onDrop(e){
 }
 
 function onDragOver(e){
-  console.log(e, this)
   if (this.context.handleFile){
     e.preventDefault()
     e.stopPropagation()
