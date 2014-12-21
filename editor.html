@@ -195,7 +195,7 @@
     </div>
     <t:placeholder t:when='filter'>
       <div class='.title'>Filter</div>
-      <div class='.body'>
+      <div class='.body' t:by='.type'>
         <div>
           <select 
             data-behavior='nodes.select' 
@@ -204,6 +204,13 @@
 
             <option value='lowpass'>Lowpass</option>
             <option value='highpass'>Highpass</option>
+            <option value='bandpass'>Bandpass</option>
+            <option value='lowshelf'>Lowshelf</option>
+            <option value='highshelf'>Highshelf</option>
+            <option value='peaking'>Peaking</option>
+            <option value='notch'>Notch</option>
+            <option value='allpass'>Allpass</option>
+
           </select>
         </div>
         <div class='-flex'>
@@ -216,8 +223,8 @@
             t:bind:data-path=':path(frequency)' 
           />
         </div>
-        <div class='-flex'>
-          <div class='.title'>resonance</div>
+        <div class='-flex' t:when='lowpass|highpass|bandpass|peaking|notch|allpass'>
+          <div class='.title'>Q</div>
           <div class='Param' 
             t:view='param' 
             data-behavior='param' 
@@ -225,6 +232,16 @@
             data-default='1'
             t:bind='.Q'
             t:bind:data-path=':path(Q)' 
+          />
+        </div>
+        <div class='-flex' t:when='lowshelf|highshelf|peaking'>
+          <div class='.title'>gain</div>
+          <div class='Param' 
+            t:view='param' 
+            data-behavior='param' data-f='dBn'
+            data-default='0'
+            t:bind='.gain'
+            t:bind:data-path=':path(gain)' 
           />
         </div>
       </div>

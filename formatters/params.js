@@ -29,6 +29,18 @@ module.exports = {
     }
   },
 
+  'dBn': {
+    size: function(value){
+      return getRatio(value, -20, 20)
+    },
+    value: function(offset, start){
+      return getValueFromScreen(offset, start, -20, 20)
+    },
+    display: function(value){
+      return String(round(value, 1)).replace(/Infinity/, "\u221e") + ' dB'
+    }
+  },
+
   'offset': {
     size: function(value){
       if (value > 0){
