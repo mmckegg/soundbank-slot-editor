@@ -1,6 +1,6 @@
 {
   "name": "soundbank-slot-editor",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Visual node editor for soundbank slots.",
   "main": "index.js",
   "scripts": {
