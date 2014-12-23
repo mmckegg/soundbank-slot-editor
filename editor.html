@@ -106,6 +106,122 @@
       />
     </t:placeholder>
 
+    <t:placeholder t:when='granular'>
+      <div class='.title'><strong>Granular: </strong> <span  t:bind='.url:or(empty sample)'/></div>
+      <div class='.body'>
+        <div t:if='supportsImportSample'>
+          <input type='file' accept='audio/wave' data-behavior='browseSample' t:bind:data-path=':path' />
+        </div>
+        <div>
+          <select 
+            data-behavior='nodes.select' 
+            t:bind:data-value='.mode:or(loop)' 
+            t:bind:data-path=':path(mode)'>
+
+            <option value='loop'>Loop</option>
+            <option value='oneshot'>Oneshot</option>
+
+          </select>
+        </div>
+        <div>
+          <a t:bind:class='.sync:activeClass(ToggleButton)'
+            t:bind:data-path=':path(sync)'
+            data-behavior='nodes.toggle' href='#'>
+              BPM Sync
+          </a>
+        </div>
+        <div class='-flex'>
+          <div class='.title'>Length</div>
+          <div t:unless='.sync' class='Param' t:view='param' 
+            data-behavior='param' 
+            data-default='1'
+            data-f='ms' 
+            t:bind='.length'
+            t:bind:data-path=':path(length)' 
+          />
+          <div t:if='.sync' class='Param' t:view='param' 
+            data-behavior='param' 
+            data-default='1'
+            data-f='beat' 
+            t:bind='.length'
+            t:bind:data-path=':path(length)' 
+          />
+        </div>
+
+        <div class='-flex'>
+          <div class='.title'>rate</div>
+          <div class='Param -forceRefresh' t:view='param' 
+            data-behavior='param' 
+            data-default='16'
+            data-f='ratio32' 
+            t:bind='.rate' 
+            t:bind:data-path=':path(rate)' />
+        </div>
+
+        <div class='-flex'>
+          <div class='.title'>gain</div>
+          <div class='Param -forceRefresh' t:view='param' 
+            data-behavior='param' 
+            data-f='dB' 
+            t:bind='.gain' 
+            t:bind:data-path=':path(gain)' />
+        </div>
+
+        <div class='-flex'>
+          <div class='.title'>transpose</div>
+          <div class='Param'
+            t:view='param' 
+            data-behavior='param' 
+            data-f='semitone' 
+            data-default='0' 
+            t:bind='.transpose' 
+            t:bind:data-path=':path(transpose)' 
+          />
+        </div>
+
+        <div class='-flex'>
+          <div class='.title'>attack</div>
+          <div class='Param'
+            t:view='param' 
+            data-behavior='param' 
+            data-f='ratio' 
+            data-default='0' 
+            t:bind='.attack' 
+            t:bind:data-path=':path(attack)' 
+          />
+        </div>
+
+        <div class='-flex'>
+          <div class='.title'>hold</div>
+          <div class='Param'
+            t:view='param' 
+            data-behavior='param' 
+            data-f='ratio' 
+            data-default='1' 
+            t:bind='.hold' 
+            t:bind:data-path=':path(hold)' 
+          />
+        </div>
+
+        <div class='-flex'>
+          <div class='.title'>release</div>
+          <div class='Param'
+            t:view='param' 
+            data-behavior='param' 
+            data-f='ratio' 
+            data-default='0.5' 
+            t:bind='.release' 
+            t:bind:data-path=':path(release)' 
+          />
+        </div>
+
+      </div>
+      <div class='SampleTrimmer' t:view='sampleTrimmer'
+        data-behavior='sampleTrimmer'
+        t:bind:data-path=':path' 
+      />
+    </t:placeholder>
+
     <t:placeholder t:when='oscillator'>
       <div class='.title'>Oscillator</div>
       <div class='.body'>
@@ -186,6 +302,7 @@
     class='Spawner -source'>
 
     <a href='#' data-node='sample'>sample</a>
+    <a href='#' data-node='granular'>granular</a>
     <a href='#' data-node='oscillator'>oscillator</a>
   </div>
 
@@ -392,6 +509,77 @@
       </div>
     </t:placeholder>
 
+    <t:placeholder t:when='reverb'>
+      <div class='.title'>Reverb</div>
+      <div class='.body'>
+        <div>
+          <a t:bind:class='.reverse:activeClass(ToggleButton)'
+            t:bind:data-path=':path(reverse)'
+            data-behavior='nodes.toggle' href='#'>
+              Reverse
+          </a>
+        </div>
+        <div class='-flex'>
+          <div class='.title'>Time</div>
+          <div class='Param' t:view='param' 
+            data-behavior='param' 
+            data-default='3'
+            data-f='ms' 
+            t:bind='.time'
+            t:bind:data-path=':path(time)' 
+          />
+        </div>
+        <div class='-flex'>
+          <div class='.title'>Decay</div>
+          <div class='Param' t:view='param' 
+            data-behavior='param' data-f='ratio' 
+            data-default='2'
+            t:bind='.feedback'
+            t:bind:data-path=':path(feedback)' 
+          />
+        </div>
+        <div>
+          <select 
+            data-behavior='nodes.select' 
+            t:bind:data-value='.filterType:or(lowpass)' 
+            t:bind:data-path=':path(filterType)'>
+
+            <option value='lowpass'>Lowpass</option>
+            <option value='highpass'>Highpass</option>
+          </select>
+        </div>
+        <div class='-flex'>
+          <div class='.title'>Cutoff</div>
+          <div class='Param' t:view='param' 
+            data-behavior='param' data-f='arfo'
+            data-default='20000'
+            t:bind='.cutoff'
+            t:bind:data-path=':path(cutoff)' 
+          />
+        </div>
+        <div class='-flex'>
+          <div class='.title'>Wet</div>
+          <div class='Param' t:view='param' 
+            data-behavior='param' 
+            data-f='dB' 
+            data-default='1'
+            t:bind='.wet'
+            t:bind:data-path=':path(wet)' 
+          />
+        </div>
+        <div class='-flex'>
+          <div class='.title'>Dry</div>
+          <div class='Param' t:view='param' 
+            data-behavior='param' 
+            data-f='dB' 
+            data-default='0'
+            t:bind='.dry'
+            t:bind:data-path=':path(dry)' 
+          />
+        </div>
+      </div>
+    </t:placeholder>
+
     <t:placeholder t:when='gain'>
       <div class='.title'>Gain</div>
       <div class='.body'>
@@ -466,7 +654,7 @@
             t:bind='.dry'
             t:bind:data-path=':path(dry)' 
           />
-
+        </div>
       </div>
     </t:placeholder>
 
@@ -478,6 +666,7 @@
     data-path='slot.processors' class='Spawner -processor'>
     <a href='#' data-node='gain'>gain</a>
     <a href='#' data-node='delay'>delay</a>
+    <a href='#' data-node='reverb'>reverb</a>
     <a href='#' data-node='filter'>filter</a>
     <a href='#' data-node='overdrive'>overdrive</a>
     <a href='#' data-node='bitcrusher'>bitcrusher</a>

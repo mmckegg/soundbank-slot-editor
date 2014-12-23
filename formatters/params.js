@@ -177,6 +177,18 @@ module.exports = {
     }
   },
 
+  'ratio32': {
+    size: function(value){
+      return getRatio(value, 0, 32)
+    },
+    value: function(offset, start){
+      return Math.max(0, Math.round(getValueFromScreen(offset, start, 0, 32)))
+    },
+    display: function(value){
+      return String(round(value, 0))
+    }
+  },
+
   'ratio100': {
     size: function(value){
       return getRatio(value, 0, 100, 'log+')
