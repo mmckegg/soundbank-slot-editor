@@ -348,6 +348,18 @@
             t:bind:data-path=':path(feedback)' 
           />
         </div>
+        
+        <div>
+          <select 
+            data-behavior='nodes.select' 
+            t:bind:data-value='.filterType:or(lowpass)' 
+            t:bind:data-path=':path(filterType)'>
+
+            <option value='lowpass'>Lowpass</option>
+            <option value='highpass'>Highpass</option>
+          </select>
+        </div>
+
         <div class='-flex'>
           <div class='.title'>Cutoff</div>
           <div class='Param' t:view='param' 
