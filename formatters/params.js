@@ -2,7 +2,7 @@ var gainToDecibels = require('./gain-to-decibels')
 var decibelsToGain = require('./decibels-to-gain')
 
 var frac = require('frac')
-var beatValues = [1/16, 1/12, 1/8, 1/6, 1/4, 1/3, 3/8, 2/3, 3/4, 1, 2, 3, 4]
+var beatValues = [1/16, 1/12, 1/8, 1/6, 1/4, 1/3, 3/8, 1/2, 2/3, 3/4, 1, 2, 3, 4, 6, 8]
 
 module.exports = {
   'default': {
